@@ -15,6 +15,94 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="assets/img/favicon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="assets/img/favicon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="assets/img/favicon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="assets/img/favicon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="assets/img/favicon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="assets/img/favicon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="assets/img/favicon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="assets/img/favicon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/img/favicon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/img/favicon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="assets/img/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/img/favicon/favicon-16x16.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/overlay.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="assets/css/light_mode.css"
+      disabled
+      class="daynight"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -40,4 +128,79 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/popup.js"></script>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-LSJSQHLZJW");
+  </script>
+  <script>
+    // animate toggles
+    // open
+    function heightopen() {
+      $(this).height($(this).get(0).scrollHeight).addClass("open"); // get height and open
+      $(this).one("transitionend", function () {
+        // after transition complete
+        $(this).height(""); // revert to CSS-set height
+      });
+    }
+
+    // close
+    function heightclose() {
+      $(this)
+        .height($(this).get(0).scrollHeight)
+        .height("")
+        .removeClass("open"); // get height and close
+    }
+
+    // open & close based on open state
+    function heightopenclose() {
+      if ($(this).hasClass("open")) {
+        $(this).each(heightclose); // close
+      } else {
+        $(this).each(heightopen); // open
+      }
+    }
+
+    $("#toggle_stats").on("click", function () {
+      $(this).toggleClass("close");
+      $(".stats_full_holder").each(heightopenclose);
+    });
+
+    $("#toggle_sales").on("click", function () {
+      $(this).toggleClass("close");
+      $(".sales_history").each(heightopenclose);
+    });
+
+    $(".checkbox_holder div").on("click", function () {
+      $(this).toggleClass("close");
+      $(".checkbox_holder").each(heightopenclose);
+    });
+
+    // $('.nfts_sidebar > span').on('click', function(){
+    //     if($('.nfts_sidebar').hasClass('open')) {
+    //         $('.nfts_sidebar').removeClass('open');
+    //     }
+    //     else {
+    //         $('.nfts_sidebar').addClass('open');
+    //     }
+    // });
+
+    $(".nfts_sidebar > span").on("click", function () {
+      $("nfts_sidebar").toggleClass("open");
+      $(".nfts_sidebar").each(heightopenclose);
+    });
+
+    $(".trigger").on("click", function () {
+      $(this).toggleClass("open");
+      $(".header").each(heightopenclose);
+    });
+  </script>
 </html>
